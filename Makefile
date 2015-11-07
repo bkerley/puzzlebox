@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -Wall -Werror -g
+CFLAGS = -Wall -Werror -g -fblocks
 
 LD = clang
 LDFLAGS = -Wall -Werror
