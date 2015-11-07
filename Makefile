@@ -14,6 +14,9 @@ all: test
 test: test.o
 	$(LD) $(LDFLAGS) test.o -o test
 
+http_notice: http_notice.o llist.o
+	$(LD) $(LDFLAGS) $< llist.o -o http_notice
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
