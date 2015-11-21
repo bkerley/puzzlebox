@@ -6,7 +6,7 @@ EXES = %w{test http_notice sqli}
 SRC_LIST = FileList.new('src/*.c')
 
 CC = 'clang'
-CFLAGS = '-Wall -Werror -g -fblocks -c'
+CFLAGS = '-Wall -Werror -g -fblocks -I include -c'
 
 LD = 'clang'
 LDFLAGS = '-Wall -Werror'
@@ -16,8 +16,12 @@ def cc(dest, *args)
 end
 
 def ld(dest, objs, libs=[])
-  lib_args = libs.map{ |l| "-L#{l}" }.join(' ')
-  sh "#{LD} #{LDFLAGS} -o #{ dest } #{objs.join ' '}"
+  lib_args = libs.map{ |l| "-l#{l}" }.join(' ')
+  sh "#{LD} #{LDFLAGS} #{lib_args} -o #{ dest } #{objs.join ' '}"
+end
+
+def objs(task)
+  task.prerequisites.grep(/\.o$/)
 end
 
 task :default => EXES.map{ |x| "bin/#{x}"}
@@ -27,12 +31,16 @@ directory 'bin'
 directory 'tmp'
 
 file 'bin/test' => %w{bin build/test.o} do |t|
-  objs = t.prerequisites.grep(/\.o$/)
-  ld t.name, objs
+  ld t.name, objs(t)
 end
 
-file 'bin/sqli' => %w{bin build/sqli.o}
-file 'bin/http_notice' => %w{bin build/http_notice.o}
+file 'bin/sqli' => %w{bin build/sqli.o} do |t|
+  ld t.name, objs(t), %w{scrypt sqlite3 BlocksRuntime}
+end
+
+file 'bin/http_notice' => %w{bin build/http_notice.o build/llist.o} do |t|
+  ld t.name, objs(t)
+end
 
 rule(%r{build/.+\.o} => [
        'build',
@@ -41,7 +49,6 @@ rule(%r{build/.+\.o} => [
          "src/#{src}.c"
        end
      ]) do |t|
-  p t
   src = t.prerequisites.grep(%r{\.c$})
   cc t.name, src
 end
