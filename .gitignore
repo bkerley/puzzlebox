@@ -1,4 +1,4 @@
-*.o
-test
-sqli
 .vagrant
+bin
+build
+tmp
