@@ -26,13 +26,11 @@ final 'test'
 final 'sqli', nil, %w{scrypt sqlite3 BlocksRuntime}
 final 'http_notice', %w{http_notice llist}
 
-rule(%r{build/.+\.o} => [
-       'build',
-       proc do |t|
-         src = File.basename(t, '.o')
-         "src/#{src}.c"
-       end
-     ]) do |t|
+rule(%r{build/.+\.o} => [proc do |t|
+                           src = File.basename(t, '.o')
+                           "src/#{src}.c"
+                         end
+                        ]) do |t|
   src = t.prerequisites.grep(%r{\.c$})
   cc t.name, src
 end
