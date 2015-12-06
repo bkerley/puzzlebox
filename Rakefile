@@ -24,7 +24,7 @@ directory 'tmp'
 
 final 'test'
 final 'sqli', nil, %w{scrypt sqlite3 BlocksRuntime}
-final 'http_notice', %w{http_notice llist}
+final 'http_notice', %w{http_notice http llist}
 
 rule(%r{build/.+\.o} => [proc do |t|
                            src = File.basename(t, '.o')
