@@ -9,6 +9,6 @@ service http_notice
         wait = no
         user = bkerley
         group = bkerley
-        server = /home/bkerley/Documents/puzzlebox/http_notice
+        server = /home/bkerley/Documents/puzzlebox/bin/http_notice
         port = 8080
 }
