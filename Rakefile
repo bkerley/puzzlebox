@@ -23,7 +23,9 @@ directory 'bin'
 directory 'tmp'
 
 final 'test'
-final 'sqli', nil, %w{scrypt sqlite3 BlocksRuntime}
+final 'sqli',
+      %w{sqli http llist sqli_handlers},
+      %w{scrypt sqlite3 BlocksRuntime}
 final 'http_notice', %w{http_notice http llist}
 
 rule(%r{build/.+\.o} => [proc do |t|
@@ -39,7 +41,7 @@ file 'tmp/depends.mf' => ['tmp', *SRC_LIST] do |t|
   sh "echo -n > #{t.name}"
   SRC_LIST.each do |src|
     obj = File.basename(src, '.c')
-    sh "#{CC} -I include -MM #{src} -MT build/#{obj}.o | sed 's/$/ build/' >> #{t.name}"
+    sh "#{CC} -I include -MM #{src} -MT build/#{obj}.o | sed 's/:/: build/' >> #{t.name}"
   end
 end
 
