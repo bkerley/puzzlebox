@@ -3,7 +3,6 @@ service sqli
         id = sqli-stream
         type = UNLISTED
         disable = no
-        enabled = sqli
         protocol = tcp
         socket_type = stream
         wait = no

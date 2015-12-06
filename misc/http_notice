@@ -3,7 +3,6 @@ service http_notice
         id = http-notice-stream
         type = UNLISTED
         disable = no
-        enabled = http_notice
         protocol = tcp
         socket_type = stream
         wait = no
