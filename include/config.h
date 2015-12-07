@@ -6,4 +6,4 @@
 #define VICTIM_USERNAME "Migishu"
 #define VICTIM_PASSWORD "Grimey Drawer"
 
-#define COMPILEDIR "/home/bkerley/Documents/puzzlebox"
+#define COMPILEDIR "/vagrant"
