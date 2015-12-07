@@ -14,9 +14,9 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "boxcutter/ubuntu1504"
 
-    config.vm.provision 'shell', inline: <<-PROVISION
+  config.vm.provision 'shell', inline: <<-PROVISION
 apt-get update
-apt-get install -y build-essential git htop libsqlite3-dev clang sqlite3 libblocksruntime-dev libscrypt-dev rake
+apt-get install -y build-essential git htop libsqlite3-dev clang sqlite3 libblocksruntime-dev libscrypt-dev rake xinetd
   PROVISION
 
   # Disable automatic box update checking. If you disable this, then
@@ -28,6 +28,9 @@ apt-get install -y build-essential git htop libsqlite3-dev clang sqlite3 libbloc
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.network 'forwarded_port', guest: 8080, host: 17080
+  config.vm.network 'forwarded_port', guest: 8081, host: 17081
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
