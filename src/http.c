@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "http.h"
+#include "proplist.h"
 
 void fsend(FILE* read);
 
@@ -31,13 +32,30 @@ char* http_read_path() {
   exit(-1);
 }
 
-void http_consume_headers() {
-  char last_header = 0;
+proplist* http_read_headers() {
+  proplist* headers = proplist_create();
   char* header_buf = calloc(HTTP_HEADER_CHUNK_LEN + 1, sizeof(char));
-  do {
+
+  while (1) {
     fgets(header_buf, HTTP_HEADER_CHUNK_LEN, stdin);
-    if (strlen(header_buf) <= 2) last_header = 1;
-  } while (last_header == 0);
+    if (strlen(header_buf) <= 2) break;
+
+    char* colon = strstr(header_buf, ": ");
+
+    size_t key_len = colon - header_buf;
+    char* key = calloc(key_len + 1, sizeof(char));
+    memcpy(key, header_buf, key_len);
+
+    size_t val_len = strlen(colon + 2);
+    char* val = calloc(val_len + 1, sizeof(char));
+    memcpy(val, colon + 2, val_len);
+
+    proplist_insert(headers, key, val);
+
+    memset(header_buf, 0, HTTP_HEADER_CHUNK_LEN + 1);
+  }
+
+  return headers;
 }
 
 void http_send_date_header() {

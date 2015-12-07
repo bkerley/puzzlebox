@@ -1,12 +1,13 @@
 #pragma once
 
 #include "llist.h"
+#include "proplist.h"
 
 #define HTTP_MAX_METHOD_LEN 4
 #define HTTP_MAX_PATH_LEN 64
 #define HTTP_MAX_DATE_LEN 64
 
-#define HTTP_HEADER_CHUNK_LEN 256
+#define HTTP_HEADER_CHUNK_LEN 1024
 
 typedef struct {
   char* key;
@@ -16,8 +17,7 @@ typedef struct {
 char* http_read_method();
 char* http_read_path();
 
-llist* http_read_headers();
-void http_consume_headers();
+proplist* http_read_headers();
 
 void http_set_response_header(char* key, char* value);
 void http_send_response_headers();

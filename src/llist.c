@@ -45,7 +45,7 @@ void llist_each(llist* list, void (^block)(void* datum)) {
   }
 }
 
-llist_node* llist_nth_node(llist_node* currentt, size_t count);
+llist_node* llist_nth_node(llist_node* current, size_t count);
 
 void* llist_nth(llist* list, size_t count) {
   llist_node* found = llist_nth_node(list->first, count);
