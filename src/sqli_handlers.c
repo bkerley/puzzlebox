@@ -28,14 +28,36 @@ void service_http_request(sqlite3* db) {
 }
 
 void handle_get(sqlite3* db, http_request req) {
+  if (0 == strcmp(req.path, "/headers")) return handle_get_headers(req);
+
+  char* buf = calloc(1024, sizeof(char));
+  snprintf(buf, 1024, "couldn't find path --%s-- wah wah :(\r\n", req.path);
+
+  http_fail(404,
+            "Not found",
+            buf);
+}
+
+void handle_get_index(sqlite3* db, http_request req) {
+  http_ok_html_headers();
+
+  http_puts("<!doctype html>");
+  http_puts("<html><head><title>welcome</title></head><body>");
+
+  http_puts("</body></html>");
+  http_puts("");
+  exit(-1);
+}
+
+void handle_get_headers(http_request req) {
+  http_ok_html_headers();
+
   http_puts("<!doctype html>");
   http_puts("<html><head><title>ayyyy</title></head><body>");
   http_puts("<dl>");
 
   proplist_each(req.headers, ^(char* key, char* value){
-
       printf("<dt>%s</dt><dd>%s</dd>\r\n", key, value);
-
     });
 
   http_puts("</dl></body></html>");

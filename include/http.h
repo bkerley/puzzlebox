@@ -27,4 +27,6 @@ void http_send_date_header();
 
 void http_fail(int code, char* failmesg, char* longmesg);
 
+void http_ok_html_headers();
+
 void http_puts(char* line);

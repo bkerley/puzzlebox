@@ -7,11 +7,13 @@
 #include "proplist.h"
 
 void fsend(FILE* read);
+void read_to_space(char* buf, size_t max_len);
+void consume_http_version();
 
 char* http_read_method() {
   char* method = calloc(HTTP_MAX_METHOD_LEN + 1, sizeof(char));
 
-  fgets(method, HTTP_MAX_METHOD_LEN, stdin);
+  read_to_space(method, HTTP_MAX_METHOD_LEN);
 
   return method;
 
@@ -21,7 +23,8 @@ char* http_read_method() {
 char* http_read_path() {
   char* path = calloc(HTTP_MAX_PATH_LEN + 1, sizeof(char));
 
-  fgets(path, HTTP_MAX_PATH_LEN, stdin);
+  read_to_space(path, HTTP_MAX_PATH_LEN);
+  consume_http_version();
 
   if (path[HTTP_MAX_PATH_LEN - 1] == 0) return path;
 
@@ -83,6 +86,13 @@ void http_fail(int code, char* failmesg, char* longmesg) {
   http_puts("");
 }
 
+void http_ok_html_headers() {
+  http_puts("HTTP/1.1 200 OK");
+  http_send_date_header();
+  http_puts("Content-type: text/html");
+  http_puts("");
+}
+
 void http_puts(char* line) {
   printf("%s\r\n", line);
 }
@@ -97,3 +107,22 @@ void fsend(FILE* in) {
   fread(buf, sizeof(char), count, in);
   fwrite(buf, sizeof(char), count, stdout);
 }
+
+void read_to_space(char* buf, size_t max_len) {
+  size_t cursor = 0;
+
+  while (1) {
+    char cur = getchar();
+    if (cur == ' ') break;
+    buf[cursor] = cur;
+    cursor++;
+    if (cursor > max_len) break;
+  }
+
+}
+
+void consume_http_version() {
+  char version[80];
+
+  fgets((char*)(&version), 128, stdin);
+};
