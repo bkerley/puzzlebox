@@ -36,7 +36,7 @@ void http_consume_headers() {
   char* header_buf = calloc(HTTP_HEADER_CHUNK_LEN + 1, sizeof(char));
   do {
     fgets(header_buf, HTTP_HEADER_CHUNK_LEN, stdin);
-    if (strlen(header_buf) <= 1) last_header = 1;
+    if (strlen(header_buf) <= 2) last_header = 1;
   } while (last_header == 0);
 }
 
