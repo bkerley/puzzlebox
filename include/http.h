@@ -10,9 +10,10 @@
 #define HTTP_HEADER_CHUNK_LEN 1024
 
 typedef struct {
-  char* key;
-  char* value;
-} http_header;
+  char* method;
+  char* path;
+  proplist* headers;
+} http_request;
 
 char* http_read_method();
 char* http_read_path();

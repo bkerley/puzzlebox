@@ -29,3 +29,10 @@ char* proplist_get(proplist* pl, char* key) {
 
   return found;
 }
+
+void proplist_each(proplist* pl, void (^block)(char* key, char* value)) {
+  llist_each(pl->list, ^(void* datum) {
+      proplist_kv* pair = (proplist_kv*) datum;
+      block(pair->key, pair->value);
+    });
+}

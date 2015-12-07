@@ -23,7 +23,11 @@ void llist_append(llist* list, void* datum) {
   llist_node* new_last = calloc(1, sizeof(llist_node));
 
   new_last->datum = datum;
-  old_last->next = new_last;
+  if (old_last) {
+    old_last->next = new_last;
+  } else {
+    list->first = new_last;
+  }
   list->last = new_last;
 }
 
@@ -34,6 +38,9 @@ void llist_prepend(llist* list, void* datum) {
   new_first->datum = datum;
   new_first->next = old_first;
   list->first = new_first;
+  if (!old_first) {
+    list->last = new_first;
+  }
 }
 
 void llist_each(llist* list, void (^block)(void* datum)) {

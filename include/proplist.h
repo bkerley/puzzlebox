@@ -14,3 +14,4 @@ typedef struct proplist_s {
 proplist* proplist_create();
 void proplist_insert(proplist* pl, char* key, char* value);
 char* proplist_get(proplist* pl, char* key);
+void proplist_each(proplist* pl, void (^block)(char* key, char* value));
