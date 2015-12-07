@@ -26,7 +26,9 @@ final 'test'
 final 'sqli',
       %w{sqli http llist proplist sqli_handlers},
       %w{scrypt sqlite3 BlocksRuntime}
-final 'http_notice', %w{http_notice http llist}
+final 'http_notice',
+      %w{http_notice http proplist llist},
+      %w{BlocksRuntime}
 
 rule(%r{build/.+\.o} => [proc do |t|
                            src = File.basename(t, '.o')
