@@ -10,5 +10,7 @@ void handle_post(sqlite3* db, http_request req);
 
 // private-ish
 
+#define HH(pth, func) if (0 == strcmp(req.path, pth)) return func(db, req)
+
 void handle_get_index(sqlite3* db, http_request req);
-void handle_get_headers(http_request req);
+void handle_get_headers(sqlite3* db, http_request req);
