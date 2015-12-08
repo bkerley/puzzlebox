@@ -24,7 +24,7 @@ directory 'tmp'
 
 final 'test'
 final 'sqli',
-      %w{sqli http llist proplist sqli_handlers},
+      %w{sqli http llist proplist sqli_handlers sqlite_util},
       %w{scrypt sqlite3 BlocksRuntime}
 final 'http_notice',
       %w{http_notice http proplist llist},
