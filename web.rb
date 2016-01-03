@@ -73,9 +73,15 @@ end
 
 post '/unlock' do
   @unlock = :attempted
-  if ENV['ON_HARDWARE']
-    # do unlock here
-    @unlock = :succeeded
+  if ENV['ON_HARDWARE'] || params[:yeahbuddy]
+    cmd = File.expand_path('../misc/open_box',
+                           __FILE__)
+    success = system cmd
+    if success
+      @unlock = :succeeded
+    else
+      @errno = $?
+    end
   end
 
   haml :admin
