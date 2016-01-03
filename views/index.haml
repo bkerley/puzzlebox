@@ -1,23 +1,18 @@
-!!! 5
-%html
-  %head
-    %title welcome to puzzle box
-    %link{href: 'default.css', rel: 'stylesheet'}
-  %body
-    %h1 welcome to puzzle box
-    %p solve the puzzles for a prize
-    %p.important
-      make <em>fucking</em> sure the box is unlatched!!!!!
-    %p lol if you burn out a servo
+%h1 welcome to puzzle box
+%p solve the puzzles for a prize
+%p.important
+  make <em>fucking</em> sure the box is unlatched!!!!!
+%p lol if you burn out a servo
 
-    %form{method: 'post', action: '/step1'}
-      %p
-        %label
-          username
-          %input{type: 'text', name: 'username'}
-      %p
-        %label
-          password
-          %input{type: 'password', name: 'password'}
-      %p
-        %input{type: 'submit', value: 'log in'}
+/ user / password
+%form{method: 'post', action: '/step1'}
+  %p
+    %label
+      username
+      %input{type: 'text', name: 'username'}
+  %p
+    %label
+      password
+      %input{type: 'password', name: 'password'}
+  %p
+    %input{type: 'submit', value: 'log in'}

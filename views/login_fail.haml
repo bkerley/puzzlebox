@@ -1,0 +1,11 @@
+%h1 couldn't log in
+
+- if defined?(@comment)
+  %p&= @comment
+
+- if defined?(@error)
+  %h2&= @error.inspect
+  %p backtrace (most recent at top)
+  %ol
+    - @error.backtrace.each do |bt|
+      %li&= bt
