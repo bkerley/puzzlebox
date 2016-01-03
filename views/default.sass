@@ -1,0 +1,29 @@
+$posgreen: #0f0
+$mono: consolas, monaco, monospace
+
+body
+  background: black
+  color: $posgreen
+  font-family: consolas, monaco
+
+h1
+  text-transform: uppercase
+
+p.important
+  animation: marquee 10s linear infinite
+
+input
+  border: 2px solid $posgreen
+  border-radius: 4px
+  background: black
+  color: $posgreen
+
+
+/* Make it move */
+@keyframes marquee
+  0%
+    transform: translateX(0)
+  50%
+    transform: translateX(20%)
+  100%
+    transform: translateX(0)

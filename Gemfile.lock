@@ -2,9 +2,13 @@ GEM
   remote: https://rubygems.org/
   specs:
     bcrypt (3.1.10)
+    haml (4.0.7)
+      tilt
+    puma (2.15.3)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    sass (3.4.20)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -17,6 +21,9 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  haml
+  puma
+  sass
   sinatra
   sqlite3
 
