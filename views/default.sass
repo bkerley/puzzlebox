@@ -43,14 +43,13 @@ table#imagemap
         padding: 0
 
 .credits p
-  animation: warez 20s infinite
-  height: 4em
+  animation: warez 10s linear infinite
   &#c1
-    animation-duration: 17s
+    animation-duration: 7s
   &#c2
-    animation-duration: 13s
+    animation-duration: 8s
   &#c3
-    animation-duration: 11s
+    animation-duration: 9s
 
 @keyframes marquee
   0%
@@ -62,12 +61,12 @@ table#imagemap
 
 @keyframes warez
   0%
-    transform: translate(0, 10%)
+    transform: translate(0, 10px)
   25%
-    transform: translate(40%, 60%)
+    transform: translate(40%, 60px)
   50%
-    transform: translate(70%, 40%)
+    transform: translate(70%, 40px)
   75%
-    transform: translate(30%, 30%)
+    transform: translate(30%, 30px)
   100%
-    transform: translate(0, 10%)
+    transform: translate(0, 10px)
