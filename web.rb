@@ -1,5 +1,9 @@
 require 'sinatra'
 
 get '/' do
-  "welcome to puzzle box"
+  haml :index
+end
+
+get '/default.css' do
+  sass :default
 end
