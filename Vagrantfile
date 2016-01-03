@@ -17,6 +17,9 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', inline: <<-PROVISION
 apt-get update
 apt-get install -y build-essential git htop libsqlite3-dev clang sqlite3 libblocksruntime-dev libscrypt-dev rake xinetd gdb lldb
+cp /vagrant/misc/sqli.vagrant.xinetd /etc/xinetd.d/sqli
+cp /vagrant/misc/http_notice.vagrant.xinetd /etc/xinetd.d/http_notice
+service xinetd restart
   PROVISION
 
   # Disable automatic box update checking. If you disable this, then
