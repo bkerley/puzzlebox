@@ -68,7 +68,17 @@ get '/admin' do
   return redirect to '/muggle' unless session[:username] == 'admin'
 
   @title = 'you kingshit'
-  erb :admin
+  haml :admin
+end
+
+post '/unlock' do
+  @unlock = :attempted
+  if ENV['ON_HARDWARE']
+    # do unlock here
+    @unlock = :succeeded
+  end
+
+  haml :admin
 end
 
 get '/default.css' do

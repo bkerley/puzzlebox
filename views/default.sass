@@ -25,7 +25,7 @@ input
   padding: 2px
   font-size: 1.1em
 
-table#Table_01
+table#imagemap
   margin: 0
   padding: 0
   tr
@@ -34,11 +34,24 @@ table#Table_01
     td
       margin: 0
       padding: 0
-      img
+      button
         margin: 0
         padding: 0
+        border: 0
+      img
+        margin: -3px -1px
+        padding: 0
 
-/* Make it move */
+.credits p
+  animation: warez 20s infinite
+  height: 4em
+  &#c1
+    animation-duration: 17s
+  &#c2
+    animation-duration: 13s
+  &#c3
+    animation-duration: 11s
+
 @keyframes marquee
   0%
     transform: translateX(0)
@@ -46,3 +59,15 @@ table#Table_01
     transform: translateX(20%)
   100%
     transform: translateX(0)
+
+@keyframes warez
+  0%
+    transform: translate(0, 10%)
+  25%
+    transform: translate(40%, 60%)
+  50%
+    transform: translate(70%, 40%)
+  75%
+    transform: translate(30%, 30%)
+  100%
+    transform: translate(0, 10%)
