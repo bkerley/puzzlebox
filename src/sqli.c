@@ -10,7 +10,6 @@
 #include "sqlite_util.h"
 #include "sqli_handlers.h"
 
-
 int main() {
   chdir(COMPILEDIR);
 

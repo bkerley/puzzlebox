@@ -18,6 +18,10 @@ void setup_db(sqlite3* db) {
            "password_digest VARCHAR);");
   syslog(LOG_MAKEPRI(LOG_USER, LOG_INFO), "created users table");
 
+  just_run(db, "INSERT INTO users (username, password_digest) VALUES ('admin', 'admin')");
+
+  just_run(db, "BEGIN TRANSACTION;");
+
   sqlite3_stmt* stmt = NULL;
   sqlite3_stmt** stmt_ptr = &stmt;
   eok(sqlite3_prepare_v2(db,
@@ -47,6 +51,8 @@ void setup_db(sqlite3* db) {
 
   sqlite3_finalize(stmt);
   syslog(LOG_MAKEPRI(LOG_USER, LOG_INFO), "finalized");
+
+  just_run(db, "COMMIT TRANSACTION;");
 }
 
 void expect_ok(int (^block)()) {
@@ -86,6 +92,8 @@ void with_db(void (^block)(sqlite3* db)) {
   eok(sqlite3_open(DBNAME, db_ptr));
 
   block(db);
+
+  eok(sqlite3_close(db));
 }
 
 void with_password_hash(char* password, void (^block)(char* password_hash)) {
