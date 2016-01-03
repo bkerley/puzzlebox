@@ -1,0 +1,13 @@
+service http_notice
+{
+        id = http-notice-stream
+        type = UNLISTED
+        disable = no
+        protocol = tcp
+        socket_type = stream
+        wait = no
+        user = vagrant
+        group = vagrant
+        server = /vagrant/bin/http_notice
+        port = 8080
+}

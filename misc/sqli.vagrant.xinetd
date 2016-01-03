@@ -1,0 +1,13 @@
+service sqli
+{
+        id = sqli-stream
+        type = UNLISTED
+        disable = no
+        protocol = tcp
+        socket_type = stream
+        wait = no
+        user = vagrant
+        group = vagrant
+        server = /vagrant/bin/sqli
+        port = 8081
+}
