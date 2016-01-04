@@ -1,0 +1,13 @@
+[Unit]
+Description=puzzlebox App Server
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/Documents/puzzlebox-sinatra
+ExecStart=/home/pi/.gem/ruby/2.1.0/bin/bundle exec puma
+TimeoutSec=30
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
