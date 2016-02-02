@@ -1,3 +1,4 @@
 FROM ruby:2.3-onbuild
-CMD ["ruby", "setup_db.rb"]
+RUN ["bundle", "exec", "ruby", "setup_db.rb"]
+CMD ["bundle", "exec", "puma"]
 EXPOSE 8080
